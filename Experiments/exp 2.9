@@ -1,0 +1,61 @@
+// in SWISH – Online Prolog Compiler
+
+
+% Subject codes and names
+subject(s1, 'Artificial Intelligence').
+subject(s2, 'Computer Networks').
+
+% Teachers and subjects
+teaches(jai, s1).
+teaches(ravi, s2).
+
+% Students and subjects
+studies(anu, s1).
+studies(anu, s2).
+studies(kiran, s1).
+studies(latha, s2).
+
+% Find teachers of a student
+taught_by(Student, Teacher) :-
+    studies(Student, Code),
+    teaches(Teacher, Code).
+
+% Find students taught by a teacher
+students_of(Teacher, Student) :-
+    teaches(Teacher, Code),
+    studies(Student, Code).
+
+% Find classmates
+classmates(Student, Classmate) :-
+    studies(Student, Code),
+    studies(Classmate, Code),
+    Student \= Classmate.
+
+% Find the subject name of a student
+subject_name_of(Student, Name) :-
+    studies(Student, Code),
+    subject(Code, Name).
+
+Queries and outputs
+1. Query
+taught_by(anu, T).
+Output:
+T = jai ;
+T = ravi.
+
+2. Query
+students_of(jai, S).
+Output:
+S = anu ;
+S = kiran.
+
+3. Query
+classmates(anu, X).
+Output:
+X = kiran ;
+X = latha.
+
+4. Query
+subject_name_of(latha, N).
+Output:
+N = 'Computer Networks'.
